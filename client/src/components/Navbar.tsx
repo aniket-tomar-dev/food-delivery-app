@@ -10,13 +10,21 @@ import {
   NavigationMenuList,
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
+import Dialog from "./DialogBox";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Navbar() {
   const isMobile = useIsMobile();
+
+  const token = localStorage.getItem("token");
+
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   window.location.href = "/";
+  // };
 
   return (
     <header className="border-b">
@@ -53,21 +61,30 @@ export default function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
         )}
-        <div className="flex justify-between gap-5">
-          <Link to="/signup">
-            <Button>
-              <UserRoundPlus size={18} /> Sign Up
-            </Button>
-          </Link>
-          <Link to="/login">
-            <Button>
-              <CircleUser size={18} /> Sign In
-            </Button>
-          </Link>
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+        <div className="flex items-center gap-4">
+          {!token ? (
+            <>
+              <Link to="/signup">
+                <Button>
+                  <UserRoundPlus size={18} /> Sign Up
+                </Button>
+              </Link>
+
+              <Link to="/login">
+                <Button>
+                  <CircleUser size={18} /> Sign In
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/foods">
+                <Button variant="outline">Foods</Button>
+              </Link>
+              <Dialog />
+            </>
+          )}
+
           <ModeToggle />
         </div>
 

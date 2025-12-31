@@ -111,6 +111,16 @@ export default function Login() {
           </div>
 
           <Button
+            variant="outline"
+            className="w-full"
+            onClick={() =>
+              window.open("http://localhost:5000/api/auth/google", "_self")
+            }
+          >
+            Continue with Google
+          </Button>
+
+          <Button
             className="w-full"
             onClick={handleSubmit(onsubmit)}
             disabled={isPending}
