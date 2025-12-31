@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getFoods } from "@/services/foodService";
+import mainImg from "../assets/main.png";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,6 +21,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import FoodCard from "@/components/FoodCard";
+import FoodCarousel from "./FoodCrousel";
 
 type Food = {
   _id: string;
@@ -91,6 +93,34 @@ const FoodList = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col md:flex-row items-center gap-6 p-6 rounded-lg shadow-md dark:bg-gray-800">
+        {/* Image */}
+        <div className="shrink-0 w-full md:w-1/2">
+          <img
+            src={mainImg}
+            alt="Description"
+            className="w-full h-auto object-cover rounded-lg"
+          />
+        </div>
+
+        {/* Text */}
+        <div className="w-full md:w-1/2 text-gray-700 dark:text-gray-200 text-sm md:text-base">
+          Our food delivery app brings your favorite restaurants and delicious
+          meals right to your doorstep. With a wide variety of cuisines, fresh
+          ingredients, and fast delivery, we make every order convenient and
+          satisfying. Whether you’re craving pizza, burgers, biryani, or
+          desserts, everything is just a few taps away. The app offers a
+          user-friendly interface, secure payment options, and real-time order
+          tracking for a smooth experience. Our goal is to provide quality food,
+          reliable service, and a hassle-free ordering process, ensuring that
+          every customer enjoys great taste and comfort with every meal.
+        </div>
+      </div>
+
+      <br />
+
+      <FoodCarousel />
+
       <h1 className="text-3xl font-bold mb-6">🍽️ Food Menu</h1>
 
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

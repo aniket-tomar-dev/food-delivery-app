@@ -78,7 +78,11 @@ const FoodCard = ({ food }: FoodCardProps) => {
           {food.isAvailable ? "Available" : "Out of Stock"}
         </Badge>
 
-        <Button size="sm" disabled={!food.isAvailable}>
+        <Button
+          size="sm"
+          disabled={!food.isAvailable}
+          className="cursor-pointer"
+        >
           Add to Cart
         </Button>
       </CardFooter>

@@ -35,7 +35,7 @@ export default function Navbar() {
             <NavigationMenuList className="gap-6">
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <Link to="/foods">Home</Link>
+                  <Link to="/">Home</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
 

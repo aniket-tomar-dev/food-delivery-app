@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
 import { signupUser } from "@/services/authService";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -28,10 +29,15 @@ export default function Signup() {
 
     try {
       await signupUser(formData);
+      toast.success("SignUp successful 🎉", {
+        description: "Welcome back!",
+      });
 
       navigate("/login");
     } catch (err: any) {
-      setError(err.response?.data?.message || "Signup failed");
+      toast.error("Signup failed ❌", {
+        description: "Required Name , Email or password",
+      });
     } finally {
       setLoading(false);
     }

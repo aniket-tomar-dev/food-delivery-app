@@ -1,39 +1,74 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "@/services/authService";
-import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { Label } from "@/components/ui/label";
+
+type LoginFormData = {
+  email: string;
+  password: string;
+};
 
 export default function Login() {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>();
+
+  // const [formData, setFormData] = useState({
+  //   email: "",
+  //   password: "",
+  // });
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       localStorage.setItem("token", data.token);
-      navigate("/");
+      toast.success("Login successful 🎉", {
+        description: "Welcome back!",
+      });
+      navigate("/foods");
+    },
+    onError: (error: any) => {
+      toast.error("Login failed ❌", {
+        description:
+          error?.response?.data?.message || "Invalid email or password",
+      });
     },
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onsubmit = (data: LoginFormData) => {
+    mutate(data);
   };
 
-  const handleLogin = () => {
-    mutate(formData);
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
+
+  // const handleLogin = () => {
+  //   mutate(formData);
+  // };
   return (
     <div className="flex min-h-[80vh] items-center justify-center">
       <Card className="w-87.5">
         <CardHeader>
           <CardTitle>Login</CardTitle>
+          <CardDescription>
+            Enter your below to login to your account
+          </CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-4">
@@ -42,22 +77,44 @@ export default function Login() {
               {(error as any)?.response?.data?.message || "Login failed"}
             </p>
           )}
-          <Input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <Input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-          />
 
-          <Button className="w-full" onClick={handleLogin} disabled={isPending}>
+          <div className="space-y-1">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              type="email"
+              placeholder="Email"
+              {...register("email", {
+                required: "Email is required",
+              })}
+            />
+            {errors.email && (
+              <p className="text-xs text-red-500">{errors.email.message}</p>
+            )}
+          </div>
+
+          <div className="space-y-1">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              type="password"
+              placeholder="Password"
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+              })}
+            />
+            {errors.password && (
+              <p className="text-xs text-red-500">{errors.password.message}</p>
+            )}
+          </div>
+
+          <Button
+            className="w-full"
+            onClick={handleSubmit(onsubmit)}
+            disabled={isPending}
+          >
             {isPending ? "Logging in..." : "Login"}
           </Button>
 
