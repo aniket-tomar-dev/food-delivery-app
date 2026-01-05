@@ -37,7 +37,7 @@ type Food = {
 
 const FoodList = () => {
   const [foods, setFoods] = useState<Food[]>([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(false);
 
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<"all" | "price" | "rating">("all");
@@ -49,7 +49,7 @@ const FoodList = () => {
 
   const fetchFoods = async () => {
     try {
-      setLoading(true);
+      // setLoading(true);
 
       const data = await getFoods({
         page,
@@ -64,7 +64,7 @@ const FoodList = () => {
     } catch (error) {
       console.error("Failed to fetch foods", error);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
@@ -83,13 +83,13 @@ const FoodList = () => {
     fetchFoods();
   };
 
-  if (loading) {
-    return (
-      <p className="text-center text-muted-foreground mt-10">
-        Loading food items...
-      </p>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <p className="text-center text-muted-foreground mt-10">
+  //       Loading food items...
+  //     </p>
+  //   );
+  // }
 
   return (
     <div className="container mx-auto px-4 py-8">

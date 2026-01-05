@@ -40,7 +40,7 @@ export default function FoodCarousel() {
   };
 
   const scrollRight = () => {
-    setScrollX(scrollX + 300);
+    setScrollX(scrollX);
   };
 
   return (

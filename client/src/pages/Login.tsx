@@ -13,6 +13,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
+import { FcGoogle } from "react-icons/fc";
 
 type LoginFormData = {
   email: string;
@@ -117,7 +118,7 @@ export default function Login() {
               window.open("http://localhost:5000/api/auth/google", "_self")
             }
           >
-            Continue with Google
+            <FcGoogle /> Continue with Google
           </Button>
 
           <Button

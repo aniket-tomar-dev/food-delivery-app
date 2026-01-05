@@ -6,6 +6,7 @@ import { signupUser } from "@/services/authService";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { FcGoogle } from "react-icons/fc";
 
 type SignupFormData = {
   name: string;
@@ -107,7 +108,7 @@ export default function Signup() {
               window.open("http://localhost:5000/api/auth/google", "_self")
             }
           >
-            Continue with Google
+            <FcGoogle /> Continue with Google
           </Button>
 
           <p className="text-center text-sm text-muted-foreground">
