@@ -37,7 +37,6 @@ type Food = {
 
 const FoodList = () => {
   const [foods, setFoods] = useState<Food[]>([]);
-  // const [loading, setLoading] = useState(false);
 
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<"all" | "price" | "rating">("all");
@@ -49,8 +48,6 @@ const FoodList = () => {
 
   const fetchFoods = async () => {
     try {
-      // setLoading(true);
-
       const data = await getFoods({
         page,
         limit,
@@ -64,7 +61,6 @@ const FoodList = () => {
     } catch (error) {
       console.error("Failed to fetch foods", error);
     } finally {
-      // setLoading(false);
     }
   };
 
@@ -83,18 +79,9 @@ const FoodList = () => {
     fetchFoods();
   };
 
-  // if (loading) {
-  //   return (
-  //     <p className="text-center text-muted-foreground mt-10">
-  //       Loading food items...
-  //     </p>
-  //   );
-  // }
-
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row items-center gap-6 p-6 rounded-lg shadow-md dark:bg-gray-800">
-        {/* Image */}
         <div className="shrink-0 w-full md:w-1/2">
           <img
             src={mainImg}
@@ -103,7 +90,6 @@ const FoodList = () => {
           />
         </div>
 
-        {/* Text */}
         <div className="w-full md:w-1/2 text-gray-700 dark:text-gray-200 text-sm md:text-base">
           Our food delivery app brings your favorite restaurants and delicious
           meals right to your doorstep. With a wide variety of cuisines, fresh

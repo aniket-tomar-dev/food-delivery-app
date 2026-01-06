@@ -12,7 +12,6 @@ import { Truck, Leaf, HeartHandshake } from "lucide-react";
 export default function About() {
   return (
     <div className="container mx-auto px-4 py-10">
-      {/* Heading */}
       <div className="text-center mb-10">
         <Badge variant="outline" className="mb-3">
           About Us
@@ -26,7 +25,6 @@ export default function About() {
 
       <Separator className="mb-10" />
 
-      {/* Mission Cards */}
       <div className="grid gap-6 md:grid-cols-3">
         <Card>
           <CardHeader>
@@ -57,7 +55,6 @@ export default function About() {
         </Card>
       </div>
 
-      {/* Story Section */}
       <div className="mt-14 grid gap-8 md:grid-cols-2 items-center">
         <div>
           <h2 className="text-2xl font-semibold mb-4">Our Story</h2>

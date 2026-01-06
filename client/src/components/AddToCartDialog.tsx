@@ -31,7 +31,6 @@ const AddToCartDialog = ({ open, onClose, food }: AddToCartDialogProps) => {
           <DialogTitle>Add Item to Cart</DialogTitle>
         </DialogHeader>
 
-        {/* 🛒 Product Info */}
         <div className="flex gap-4">
           <img
             src={food.image}

@@ -42,7 +42,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-  // decrement quantity by 1, remove if 0
   const decrementItem = (index: number) => {
     setCart((prev) =>
       prev

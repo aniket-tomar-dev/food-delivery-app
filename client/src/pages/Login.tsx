@@ -29,11 +29,6 @@ export default function Login() {
     formState: { errors },
   } = useForm<LoginFormData>();
 
-  // const [formData, setFormData] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-
   const { mutate, isPending, error } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
@@ -55,13 +50,6 @@ export default function Login() {
     mutate(data);
   };
 
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
-
-  // const handleLogin = () => {
-  //   mutate(formData);
-  // };
   return (
     <div className="flex min-h-[80vh] items-center justify-center">
       <Card className="w-87.5">

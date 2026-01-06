@@ -36,7 +36,6 @@ export default function Footer() {
   return (
     <footer className="mt-10 border-t  backdrop-blur-md shadow-md">
       <div className="container mx-auto px-4 py-10 grid gap-8 md:grid-cols-3">
-        {/* Brand */}
         <div>
           <h2 className="text-xl font-bold">MyApp</h2>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -44,7 +43,6 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Dynamic Links */}
         <div>
           <h3 className="mb-3 text-sm font-semibold uppercase">Quick Links</h3>
           <ul className="space-y-2 text-sm">
@@ -58,7 +56,6 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Newsletter */}
         <div>
           <h3 className="mb-3 text-sm font-semibold uppercase flex items-center gap-2">
             <Mail className="w-4 h-4" /> Newsletter
@@ -78,7 +75,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom */}
       <div className="mt-8 border-t pt-4 text-center text-sm text-muted-foreground">
         © {new Date().getFullYear()} MyApp. All rights reserved.
       </div>

@@ -49,7 +49,6 @@ export default function FoodCarousel() {
         Order our best food options
       </h2>
 
-      {/* Scroll buttons */}
       <button
         onClick={scrollLeft}
         className="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow-md hover:bg-gray-200 dark:hover:bg-gray-700 z-10"

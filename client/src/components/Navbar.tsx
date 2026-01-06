@@ -24,7 +24,6 @@ export default function Navbar() {
   const isMobile = useIsMobile();
   const token = localStorage.getItem("token");
 
-  // 🛒 Cart logic
   const { cart } = useCart();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const [openCart, setOpenCart] = useState(false);
@@ -32,7 +31,6 @@ export default function Navbar() {
   return (
     <header className="border-b">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        {/* LOGO */}
         <Link to="/" className="flex items-center gap-2 text-lg font-bold">
           <img
             src={logo}
@@ -67,9 +65,7 @@ export default function Navbar() {
           </NavigationMenu>
         )}
 
-        {/* RIGHT SIDE */}
         <div className="flex items-center gap-4">
-          {/* 🛒 CART ICON */}
           <div
             className="relative cursor-pointer"
             onClick={() => setOpenCart(true)}

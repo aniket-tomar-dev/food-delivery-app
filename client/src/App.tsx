@@ -19,7 +19,6 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/foods" element={<FoodList />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
@@ -33,7 +32,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* baad me aur pages add kar sakte ho */}
       </Routes>
       <Footer />
     </ThemeProvider>
