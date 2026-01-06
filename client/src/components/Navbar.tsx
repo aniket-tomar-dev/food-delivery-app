@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, CircleUser, UserRoundPlus } from "lucide-react";
+import { Menu, CircleUser, UserRoundPlus, ShoppingCart } from "lucide-react";
+
 import { ModeToggle } from "../components/mode-toggle";
 import logo from "@/assets/rapid.png";
 
@@ -10,25 +12,27 @@ import {
   NavigationMenuList,
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
-import Dialog from "./DialogBox";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
-// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import Dialog from "./DialogBox";
+import CartDrawer from "@/components/CartDrawer";
+import { useCart } from "@/context/CartContext";
 
 export default function Navbar() {
   const isMobile = useIsMobile();
-
   const token = localStorage.getItem("token");
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("token");
-  //   window.location.href = "/";
-  // };
+  // 🛒 Cart logic
+  const { cart } = useCart();
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const [openCart, setOpenCart] = useState(false);
 
   return (
     <header className="border-b">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        {/* LOGO */}
         <Link to="/" className="flex items-center gap-2 text-lg font-bold">
           <img
             src={logo}
@@ -38,6 +42,7 @@ export default function Navbar() {
           Rapid Food
         </Link>
 
+        {/* DESKTOP MENU */}
         {!isMobile && (
           <NavigationMenu>
             <NavigationMenuList className="gap-6">
@@ -61,7 +66,23 @@ export default function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
         )}
+
+        {/* RIGHT SIDE */}
         <div className="flex items-center gap-4">
+          {/* 🛒 CART ICON */}
+          <div
+            className="relative cursor-pointer"
+            onClick={() => setOpenCart(true)}
+          >
+            <ShoppingCart />
+
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 rounded-full">
+                {totalItems}
+              </span>
+            )}
+          </div>
+
           {!token ? (
             <>
               <Link to="/signup">
@@ -88,6 +109,7 @@ export default function Navbar() {
           <ModeToggle />
         </div>
 
+        {/* MOBILE MENU */}
         {isMobile && (
           <Sheet>
             <SheetTrigger asChild>
@@ -110,6 +132,9 @@ export default function Navbar() {
           </Sheet>
         )}
       </div>
+
+      {/* 🧾 CART DRAWER */}
+      <CartDrawer open={openCart} onClose={() => setOpenCart(false)} />
     </header>
   );
 }

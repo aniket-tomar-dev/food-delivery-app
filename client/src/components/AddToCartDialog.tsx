@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from "../components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/context/CartContext";
 
 type AddToCartDialogProps = {
   open: boolean;
@@ -21,6 +22,7 @@ type AddToCartDialogProps = {
 
 const AddToCartDialog = ({ open, onClose, food }: AddToCartDialogProps) => {
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -78,7 +80,17 @@ const AddToCartDialog = ({ open, onClose, food }: AddToCartDialogProps) => {
           <Button variant="outline" onClick={onClose}>
             Cancel
           </Button>
-          <Button>Add to Cart</Button>
+          <Button
+            onClick={() => {
+              addToCart({
+                ...food,
+                quantity,
+              });
+              onClose();
+            }}
+          >
+            Add to Cart
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
