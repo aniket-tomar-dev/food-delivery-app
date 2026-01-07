@@ -81,7 +81,7 @@ const FoodList = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row items-center gap-6 p-6 rounded-lg shadow-md dark:bg-gray-800">
+      {/* <div className="flex flex-col md:flex-row items-center gap-6 p-6 rounded-lg shadow-md dark:bg-gray-800">
         <div className="shrink-0 w-full md:w-1/2">
           <img
             src={mainImg}
@@ -101,9 +101,9 @@ const FoodList = () => {
           reliable service, and a hassle-free ordering process, ensuring that
           every customer enjoys great taste and comfort with every meal.
         </div>
-      </div>
+      </div> */}
 
-      <br />
+      {/* <br /> */}
 
       <FoodCarousel />
 
