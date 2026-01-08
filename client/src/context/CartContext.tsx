@@ -80,12 +80,17 @@ type CartContextType = {
   removeFromCart: (index: number) => void;
   incrementItem: (index: number) => void;
   decrementItem: (index: number) => void;
+  clearCart: () => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+
+  const clearCart = () => {
+    setCart([]);
+  };
 
   // ✅ Add to cart or increment if same item
   const addToCart = (item: CartItem) => {
@@ -133,7 +138,14 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, incrementItem, decrementItem }}
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        incrementItem,
+        decrementItem,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>

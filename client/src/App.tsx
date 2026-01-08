@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import ProtectedRoute from "@/routes/ProtectedRoute";
 import Footer from "./pages/Footer";
 import LoginSuccess from "./pages/LoginSuccess";
+import Checkout from "@/pages/checkout";
 
 function App() {
   return (
@@ -29,6 +30,14 @@ function App() {
           element={
             <ProtectedRoute>
               <FoodList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute>
+              <Checkout />
             </ProtectedRoute>
           }
         />

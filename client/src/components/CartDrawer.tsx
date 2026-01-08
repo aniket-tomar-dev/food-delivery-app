@@ -129,6 +129,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { X, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 type CartDrawerProps = {
   open: boolean;
@@ -137,6 +138,8 @@ type CartDrawerProps = {
 
 const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
   const { cart, incrementItem, decrementItem, removeFromCart } = useCart();
+
+  const navigate = useNavigate();
 
   if (!open) return null;
 
@@ -247,7 +250,14 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
             <span>Total</span>
             <span>₹{totalPrice}</span>
           </div>
-          <Button className="w-full h-11 rounded-xl text-base font-medium">
+          <Button
+            className="w-full h-11 rounded-xl text-base font-medium"
+            disabled={cart.length === 0}
+            onClick={() => {
+              onClose();
+              navigate("/checkout");
+            }}
+          >
             Checkout
           </Button>
         </div>
