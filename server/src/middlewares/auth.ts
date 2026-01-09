@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 export const auth = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
-  console.log("AUTH HEADER:", authHeader);
+  // console.log("AUTH HEADER:", authHeader);
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ message: "No token provided" });
@@ -12,16 +12,17 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
-      userId: string;
-    };
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET!
+    ) as jwt.JwtPayload;
 
-    console.log("DECODED TOKEN:", decoded);
+    // console.log("DECODED TOKEN:", decoded);
 
     // ✅ EXACT FIX
-    (req as any).user = { _id: decoded.userId };
+    (req as any).user = { _id: decoded.id };
 
-    console.log("REQ.USER SET TO:", (req as any).user);
+    // console.log("REQ.USER SET TO:", (req as any).user);
 
     next();
   } catch (error) {

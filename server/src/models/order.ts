@@ -14,6 +14,12 @@ export interface IOrder extends Document {
   address: string;
   totalAmount: number;
   paymentMethod: string;
+  status: "Pending" | "Confirmed" | "Out for Delivery" | "Delivered";
+  estimatedDeliveryTime: string;
+  rider?: {
+    name: string;
+    phone: string;
+  };
 }
 
 const orderItemSchema = new Schema<OrderItem>(
@@ -32,7 +38,7 @@ const orderSchema = new Schema<IOrder>(
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      // required: true,
     },
 
     // ✅ THIS IS THE FIX
@@ -54,6 +60,21 @@ const orderSchema = new Schema<IOrder>(
     paymentMethod: {
       type: String,
       default: "COD",
+    },
+    status: {
+      type: String,
+      enum: ["Pending", "Confirmed", "Out for Delivery", "Delivered"],
+      default: "Pending",
+    },
+
+    estimatedDeliveryTime: {
+      type: String,
+      default: "30 mins",
+    },
+
+    rider: {
+      name: String,
+      phone: String,
     },
   },
   { timestamps: true }
