@@ -13,6 +13,8 @@ import Footer from "./pages/Footer";
 import LoginSuccess from "./pages/LoginSuccess";
 import Checkout from "@/pages/checkout";
 import OrderDetails from "@/pages/OrderDetails";
+import AdminRoute from "@/routes/AdminRoute";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   return (
@@ -48,6 +50,14 @@ function App() {
             <ProtectedRoute>
               <OrderDetails />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
           }
         />
       </Routes>

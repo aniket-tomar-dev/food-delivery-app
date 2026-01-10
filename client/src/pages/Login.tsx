@@ -33,10 +33,11 @@ export default function Login() {
     mutationFn: loginUser,
     onSuccess: (data) => {
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
       toast.success("Login successful 🎉", {
         description: "Welcome back!",
       });
-      navigate("/foods");
+      navigate(data.user.isAdmin ? "/admin" : "/foods");
     },
     onError: (error: any) => {
       toast.error("Login failed ❌", {
