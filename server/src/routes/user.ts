@@ -1,12 +1,14 @@
 import { Router } from "express";
-import { signup, login } from "../controllers/user";
+import { signup, login, getMe } from "../controllers/user";
 import passport from "passport";
+import { protect } from "../middlewares/isAdmin";
 import { googleAuthSuccess } from "../controllers/googleAuth";
 
 const router = Router();
 
 router.post("/signup", signup);
 router.post("/login", login);
+router.get("/me", protect, getMe);
 
 router.get(
   "/google",

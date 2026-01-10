@@ -51,10 +51,12 @@ export const login = async (req: Request, res: Response) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid Password" });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!, {
+    const isAdmin = user.email === process.env.ADMIN_EMAIL;
+
+    const token = jwt.sign({ id: user._id, isAdmin }, process.env.JWT_SECRET!, {
       expiresIn: "7d",
     });
 
@@ -65,9 +67,27 @@ export const login = async (req: Request, res: Response) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        isAdmin,
       },
     });
   } catch (error) {
     res.status(500).json({ message: "Login failed", error });
   }
+};
+
+export const getMe = async (req: any, res: Response) => {
+  const user = await User.findById(req.user.id).select("-password");
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  const isAdmin = user.email === process.env.ADMIN_EMAIL;
+
+  res.json({
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    isAdmin,
+  });
 };
