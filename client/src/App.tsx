@@ -15,6 +15,9 @@ import Checkout from "@/pages/checkout";
 import OrderDetails from "@/pages/OrderDetails";
 import AdminRoute from "@/routes/AdminRoute";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminUsers from "./pages/AdminUsers";
+import AdminOrders from "./pages/AdminOrders";
+import AddFood from "./pages/AddFood";
 
 function App() {
   return (
@@ -57,6 +60,31 @@ function App() {
           element={
             <AdminRoute>
               <AdminDashboard />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/add-food"
+          element={
+            <AdminRoute>
+              <AddFood />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <AdminRoute>
+              <AdminUsers />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/orders"
+          element={
+            <AdminRoute>
+              <AdminOrders />
             </AdminRoute>
           }
         />
