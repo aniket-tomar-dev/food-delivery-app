@@ -7,6 +7,8 @@ export interface IUser extends Document {
   dob: Date;
   googleId?: string;
   avatar?: string;
+  isAdmin: boolean;
+  isBlocked: boolean;
 }
 
 const userSchema = new Schema<IUser>(
@@ -23,6 +25,16 @@ const userSchema = new Schema<IUser>(
     },
     avatar: {
       type: String,
+    },
+
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+
+    isBlocked: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

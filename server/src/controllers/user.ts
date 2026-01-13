@@ -54,6 +54,12 @@ export const login = async (req: Request, res: Response) => {
       return res.status(401).json({ message: "Invalid Password" });
     }
 
+    if (user.isBlocked) {
+      return res.status(403).json({
+        message: "Your account has been blocked by admin",
+      });
+    }
+
     const isAdmin = user.email === process.env.ADMIN_EMAIL;
 
     const token = jwt.sign({ id: user._id, isAdmin }, process.env.JWT_SECRET!, {
@@ -68,6 +74,7 @@ export const login = async (req: Request, res: Response) => {
         name: user.name,
         email: user.email,
         isAdmin,
+        isBlocked: user.isBlocked,
       },
     });
   } catch (error) {

@@ -1,14 +1,16 @@
 import { Router } from "express";
-import { getFoods } from "../controllers/food";
-// import { auth } from "../middlewares/auth";
-// import { isAdmin } from "../middlewares/isAdmin";
+import { getFoods, addFood, updateFood, deleteFood } from "../controllers/food";
+import { protect } from "../middlewares/protect";
+import { adminOnly } from "../middlewares/adminOnly";
 
 const router = Router();
 
+// 🔓 PUBLIC (Users)
 router.get("/", getFoods);
 
-// router.post("/", auth, isAdmin, addFood);
-// router.put("/:id", auth, isAdmin, updateFood);
-// router.delete("/:id", auth, isAdmin, deleteFood);
+// 🔐 ADMIN (CRUD)
+router.post("/", protect, adminOnly, addFood);
+router.put("/:id", protect, adminOnly, updateFood);
+router.delete("/:id", protect, adminOnly, deleteFood);
 
 export default router;
