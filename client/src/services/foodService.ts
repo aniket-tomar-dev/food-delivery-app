@@ -10,8 +10,12 @@ export const getFoods = async (params: {
   return res.data;
 };
 
-export const addFood = async (data: any) => {
-  const res = await api.post("/foods", data);
+export const addFood = async (data: FormData) => {
+  const res = await api.post("/foods", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return res.data;
 };
 

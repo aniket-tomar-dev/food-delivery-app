@@ -244,7 +244,6 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
           ))}
         </div>
 
-        {/* Footer */}
         <div className="px-5 py-4 border-t bg-background">
           <div className="flex justify-between items-center text-base font-semibold mb-3">
             <span>Total</span>

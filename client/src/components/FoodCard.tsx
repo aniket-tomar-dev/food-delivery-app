@@ -27,6 +27,16 @@ type FoodCardProps = {
   food: Food;
 };
 
+function getFoodImageURL(imageUrl: string) {
+  try {
+    new URL(imageUrl);
+    return imageUrl;
+  } catch (error) {
+    const url = `${import.meta.env.VITE_API_BASE_IMAGE_URL}${imageUrl}`;
+    return url;
+  }
+}
+
 const FoodCard = ({ food }: FoodCardProps) => {
   const [open, setOpen] = useState(false);
   return (
@@ -34,7 +44,7 @@ const FoodCard = ({ food }: FoodCardProps) => {
       <Card className="overflow-hidden transition hover:shadow-lg">
         <div className="relative">
           <img
-            src={food.image}
+            src={getFoodImageURL(food.image)}
             alt={food.name}
             className="h-48 w-full object-cover"
           />
